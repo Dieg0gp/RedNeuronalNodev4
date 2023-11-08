@@ -29,10 +29,10 @@ document.getElementById("like").addEventListener("click", function () {
   const fechaHora = new Date();  
   const horaActual = fechaHora.getHours() + ":" + fechaHora.getMinutes() + ":" + fechaHora.getSeconds();
   const respuestaBoton = "le gusta";
-  /*alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
+  alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
         + "\nEl color de texto del chiste es " + jokeTextColorHex + "\nHiciste clic en el " 
         + animalSeleccionado + " y te gusta" + "\nLa hora y Fecha: " + horaActual + "\n Chiste: " + jokeText
-        + "\nEstado de Animo:" + estadoAnimo);*/
+        + "\nEstado de Animo:" + estadoAnimo);
   // Obtener referencias a los campos de entrada del formulario
   const ipInput = document.getElementById("ip");
   const fondoInput = document.getElementById("fondo");
@@ -66,11 +66,11 @@ document.getElementById("dislike").addEventListener("click", function () {
   const fechaHora = new Date();
   const horaActual = fechaHora.getHours() + ":" + fechaHora.getMinutes() + ":" + fechaHora.getSeconds();
   const respuestaBoton = "no le gusta";
-  /*alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
+  alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
         + "\nEl color de texto del chiste es " + jokeTextColorHex + "\nHiciste clic en el " 
         + animalSeleccionado + " y no te gusta"+ "\nLa hora y Fecha: " + horaActual + "\n Chiste: " + jokeText
         + "\n Estado de Animo: " + estadoAnimo);
-  */
+  
   // Obtener referencias a los campos de entrada del formulario
   const ipInput = document.getElementById("ip");
   const fondoInput = document.getElementById("fondo");
