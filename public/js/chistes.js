@@ -81,7 +81,8 @@ const chistes = [
     "¿Cuál es el colmo de un peluquero? ¡Perder el autobús por los pelos!",
     "¡Qué estrés! Dos más uno.",
     "¿Cuál es el colmo de un libro? ¡Que en otoño se le caigan las hojas!",
-    "¿Sabes que mi hermano anda en bicicleta desde los cinco años? ¿Ah sí? ¡Qué lejos debe de estar ya!"
+    "¿Sabes que mi hermano anda en bicicleta desde los cinco años? ¿Ah sí? ¡Qué lejos debe de estar ya!",
+    "¿Qué le dice un negro a otro negro?.... por que no hacemos un agujero negro"
   // coloquen más chistes
  ];
 const jokeElement = document.getElementById("joke");
