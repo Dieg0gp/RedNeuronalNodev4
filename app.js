@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Conecta a tu base de datos MongoDB Atlas
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, serverSelectionTimeoutMS: 30000 })
     .then(() => console.log('Conexión a MongoDB Atlas exitosa'))
     .catch(err => console.error('Error de conexión a MongoDB Atlas: ', err));
 
