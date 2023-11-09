@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const app = express();
 
 // Conecta a tu base de datos MongoDB Atlas
-mongoose.connect('mongodb+srv://diegogupa:rRWKGNvUeWeMKJng@cluster0.kjtpgpi.mongodb.net/Prueba1', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Conexión a MongoDB Atlas exitosa'))
     .catch(err => console.error('Error de conexión a MongoDB Atlas: ', err));
 
@@ -18,8 +19,9 @@ const usuarioSchema = new Schema({
     mascota: String,
     boton: String,
     hora: String,
-    chiste: String,
-    animo: String
+    chiste: String,    
+    animo: String,
+    personalidad: String
 });
 const Usuario = mongoose.model('Usuario', usuarioSchema);
 
@@ -40,7 +42,8 @@ app.post('/registrar', (req, res) => {
         boton: req.body.boton,
         hora: req.body.hora,
         chiste: req.body.chiste,
-        animo: req.body.animo
+        animo: req.body.animo,
+        personalidad: req.body.personalidad
     });
     nuevoUsuario.save()
         .then(() => {

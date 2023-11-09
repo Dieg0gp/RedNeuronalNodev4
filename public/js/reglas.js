@@ -4,6 +4,15 @@ function obtenerDatosUsuario() {
     const jokeTextColor = window.getComputedStyle(document.getElementById("joke")).getPropertyValue("color");
     const jokeTextColorHex = rgbToHex(jokeTextColor);
     const animalPreferido = document.getElementById("perro").classList.contains("seleccionado") ? "perro" : "gato";
+    const eleccionDelUsuario = document.getElementById("tuElemento").classList.contains("like") ? "like" : "dislike";
+
+    if (eleccionDelUsuario === "like") {
+      // El usuario eligió "like"
+      const like = "gutar"
+    } else {
+      // El usuario eligió "dislike"
+      const dislike = "no gutar"
+    }
     return {
       colorFondo: bodyBackgroundColorHex,
       colorTexto: jokeTextColorHex,
@@ -14,8 +23,8 @@ function obtenerDatosUsuario() {
   function obtenerEstadoAnimo(datosUsuario) {
     const coloresAlegres = ["red", "orange", "yellow"];
     const coloresTristes = ["blue", "indigo", "violet"];
-    const esAlegre = coloresAlegres.includes(datosUsuario.colorFondo) && datosUsuario.colorTexto === "#008000" && datosUsuario.animalPreferido === "perro";
-    const esTriste = coloresTristes.includes(datosUsuario.colorFondo) && datosUsuario.colorTexto === "#FFFFFF" && datosUsuario.animalPreferido === "gato";
+    const esAlegre = datosUsuario.animalPreferido === "perro" && like;
+    const esTriste = datosUsuario.animalPreferido === "gato" && dislike;
     if (esAlegre) {
       return "alegre";
     } else if (esTriste) {
@@ -38,3 +47,10 @@ function obtenerDatosUsuario() {
     const estadoAnimo = obtenerEstadoAnimo(datosUsuario);
     alert("Tu estado de ánimo es " + estadoAnimo);
   });
+
+  const nuevosDatos = obtenerEstadoAnimo(datosUsuario);
+
+// Iterar sobre las celdas y asignar los nuevos datos
+celdasCambiar.forEach((celda, indice) => {
+  celda.textContent = nuevosDatos[indice];
+});

@@ -12,6 +12,17 @@
 <body>   
 <br><br>
 <form action="/registrar" method="POST">
+  <div id="container">
+    <p id="joke"></p>
+  </div>
+  <div id="image-container">
+    <img src="../images/dog.jpeg" alt="Perro" id="perro">
+    <img src="../images/cat.jpg" alt="Gato" id="gato">
+  </div>
+  <div id="like-dislike">
+    <button type="submit" name="accion" value="like" id="like"><i class="fa-regular fa-thumbs-up"></i> Me gusta</button>
+    <button type="submit" name="accion" value="dislike" id="dislike"><i class="fas fa-thumbs-down"></i> No me gusta</button>
+  </div>
   <!---->
   <input type="text" id="ip" name="ip" style="display: none;" required>
   <br>
@@ -29,18 +40,9 @@
   <br>
   <input type="text" id="animo" name="animo" style="display: none;" required>
   <br>
+  <input type="text" id="personalidad" name="personalidad" style="display: none;" required>
+  <br>
   <!---->
-  <div id="container">
-    <p id="joke"></p>
-  </div>
-  <div id="image-container">
-    <img src="../images/dog.jpeg" alt="Perro" id="perro">
-    <img src="../images/cat.jpg" alt="Gato" id="gato">
-  </div>
-  <div id="like-dislike">
-    <button type="submit" name="accion" value="like" id="like"><i class="fa-regular fa-thumbs-up"></i> Me gusta</button>
-    <button type="submit" name="accion" value="dislike" id="dislike"><i class="fas fa-thumbs-down"></i> No me gusta</button>
-  </div>
 </form>
 <div id="resultado"></div>
   <script src="../js/colores.js"></script>

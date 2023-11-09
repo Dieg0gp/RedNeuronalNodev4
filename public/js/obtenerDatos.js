@@ -26,13 +26,14 @@ document.getElementById("like").addEventListener("click", function () {
   const jokeText = document.getElementById("joke").textContent;
   const datosUsuario = obtenerDatosUsuario();
   const estadoAnimo = obtenerEstadoAnimo(datosUsuario);
+  const personalidad = obtenerHipotesis(animalSeleccionado);
   const fechaHora = new Date();  
   const horaActual = fechaHora.getHours() + ":" + fechaHora.getMinutes() + ":" + fechaHora.getSeconds();
   const respuestaBoton = "le gusta";
-  /*alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
+  alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
         + "\nEl color de texto del chiste es " + jokeTextColorHex + "\nHiciste clic en el " 
         + animalSeleccionado + " y te gusta" + "\nLa hora y Fecha: " + horaActual + "\n Chiste: " + jokeText
-        + "\nEstado de Animo:" + estadoAnimo);*/
+        + "\nEstado de Animo:" + estadoAnimo + "\nHipotesis: " + personalidad);
   // Obtener referencias a los campos de entrada del formulario
   const ipInput = document.getElementById("ip");
   const fondoInput = document.getElementById("fondo");
@@ -42,6 +43,7 @@ document.getElementById("like").addEventListener("click", function () {
   const horaInput = document.getElementById("hora");
   const chisteInput = document.getElementById("chiste");
   const animoInput = document.getElementById("animo");
+  const personalidadInput = document.getElementById("personalidad");
   // Construir el contenido que se mostrará en el div
   ipInput.value = ip;
   fondoInput.value = bodyBackgroundColorHex;
@@ -51,6 +53,7 @@ document.getElementById("like").addEventListener("click", function () {
   horaInput.value = horaActual;
   chisteInput.value = jokeText;
   animoInput.value = estadoAnimo;
+  personalidadInput.value = personalidad;
   // Llamar a la función para guardar los datos en la base de dato
         //guardarDatos(ip, bodyBackgroundColorHex, jokeTextColorHex, animalSeleccionado, horaActual, respuestaBoton, jokeText, estadoAnimo);
 });
@@ -63,14 +66,14 @@ document.getElementById("dislike").addEventListener("click", function () {
   const jokeText = document.getElementById("joke").textContent;
   const datosUsuario = obtenerDatosUsuario();
   const estadoAnimo = obtenerEstadoAnimo(datosUsuario);
+  const personalidad = obtenerHipotesis(animalSeleccionado);
   const fechaHora = new Date();
   const horaActual = fechaHora.getHours() + ":" + fechaHora.getMinutes() + ":" + fechaHora.getSeconds();
   const respuestaBoton = "no le gusta";
-  /*alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
+  alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
         + "\nEl color de texto del chiste es " + jokeTextColorHex + "\nHiciste clic en el " 
         + animalSeleccionado + " y no te gusta"+ "\nLa hora y Fecha: " + horaActual + "\n Chiste: " + jokeText
-        + "\n Estado de Animo: " + estadoAnimo);
-  */
+        + "\n Estado de Animo: " + estadoAnimo + "\nHipotesis: " + personalidad);
   // Obtener referencias a los campos de entrada del formulario
   const ipInput = document.getElementById("ip");
   const fondoInput = document.getElementById("fondo");
@@ -80,6 +83,7 @@ document.getElementById("dislike").addEventListener("click", function () {
   const horaInput = document.getElementById("hora");
   const chisteInput = document.getElementById("chiste");
   const animoInput = document.getElementById("animo");
+  const personalidadInput = document.getElementById("personalidad");
   // Construir el contenido que se mostrará en el div
   ipInput.value = ip;
   fondoInput.value = bodyBackgroundColorHex;
@@ -89,6 +93,7 @@ document.getElementById("dislike").addEventListener("click", function () {
   horaInput.value = horaActual;
   chisteInput.value = jokeText;
   animoInput.value = estadoAnimo;
+  personalidadInput.value = personalidad;
         //
         //guardarDatos(ip, bodyBackgroundColorHex, jokeTextColorHex, animalSeleccionado, horaActual, respuestaBoton, jokeText, estadoAnimo);
 });
@@ -121,6 +126,13 @@ function obtenerDatosUsuario() {
   }
   
   function obtenerEstadoAnimo(datosUsuario) {
+    const rojo = "Atentos";
+    const azul = "Calmados";
+    const verde = "Ansioso";
+    const amarillo = "Creativos";
+    const naranja = "Concentrados";
+    const Violeta = "Relajados";
+    const indigo = "Introspectivo";
     const coloresAlegres = ["red", "orange", "yellow"];
     const coloresTristes = ["blue", "indigo", "violet"];
     const esAlegre = coloresAlegres.includes(datosUsuario.colorFondo) && datosUsuario.colorTexto === "#008000" && datosUsuario.animalPreferido === "perro";
@@ -131,6 +143,16 @@ function obtenerDatosUsuario() {
       return "triste";
     } else {
       return "neutral";
+    }
+  }
+
+  function obtenerHipotesis(animalSeleccionado){
+    const hipotesis1 = "Sociables, Abiertos";
+    const hipotesis2 = "Introvertidos";    
+    if(animalSeleccionado == "perro"){
+      return hipotesis1;
+    } else if(animalSeleccionado == "gato"){
+      return hipotesis2;
     }
   }
 
