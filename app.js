@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public')); // Configura Express para servir archivos estáticos desde la carpeta "public"
 
+
 // Ruta para procesar el formulario y guardar datos en MongoDB Atlas
 app.post('/registrar', (req, res) => {
     const nuevoUsuario = new Usuario({
@@ -51,6 +52,16 @@ app.post('/registrar', (req, res) => {
             res.redirect('/');
         })
     .catch(err => console.error('Error al registrar el usuario: ', err));
+});
+
+app.get('/mostrar-datos', async (req, res) => {
+    try {
+        const usuarios = await Usuario.find();
+        res.json(usuarios);
+    } catch (error) {
+        console.error('Error al obtener datos de MongoDB: ', error);
+        res.status(500).send('Error interno del servidor');
+    }
 });
 
 // Inicia el servidor

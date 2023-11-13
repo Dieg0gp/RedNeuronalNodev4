@@ -23,17 +23,22 @@ document.getElementById("like").addEventListener("click", function () {
   const bodyBackgroundColorHex = rgbToHex(bodyBackgroundColor);
   const jokeTextColor = window.getComputedStyle(document.getElementById("joke")).getPropertyValue("color");
   const jokeTextColorHex = rgbToHex(jokeTextColor);
+  const container = document.getElementById("container");
+  const colorContenedor = getComputedStyle(container).backgroundColor;
+  const colorContenedorHex = rgbToHex(colorContenedor);
   const jokeText = document.getElementById("joke").textContent;  
   const datosUsuario = obtenerDatosUsuario();
   const estadoAnimo = obtenerEstadoAnimo(datosUsuario);
   const personalidad = obtenerHipotesis(animalSeleccionado);
+  const algoritmo = tercerColor(datosUsuario);
   const fechaHora = new Date();  
   const horaActual = fechaHora.getHours() + ":" + fechaHora.getMinutes() + ":" + fechaHora.getSeconds();
   const respuestaBoton = "le gusta";
   /*alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
         + "\nEl color de texto del chiste es " + jokeTextColorHex + "\nHiciste clic en el " 
         + animalSeleccionado + " y te gusta" + "\nLa hora y Fecha: " + horaActual + "\n Chiste: " + jokeText
-        + "\nEstado de Animo:" + estadoAnimo + "\nHipotesis: " + personalidad);*/
+        + "\nEstado de Animo:" + estadoAnimo + "\nHipotesis: " + personalidad + "\n Color Contenedor:" + colorContenedorHex
+        + "\nComplemento: " + algoritmo);*/
   // Obtener referencias a los campos de entrada del formulario
   const ipInput = document.getElementById("ip");
   const fondoInput = document.getElementById("fondo");
@@ -73,8 +78,8 @@ document.getElementById("dislike").addEventListener("click", function () {
   /*alert("Tu ip es: " + ip + "\nEl color de fondo del body es " + bodyBackgroundColorHex 
         + "\nEl color de texto del chiste es " + jokeTextColorHex + "\nHiciste clic en el " 
         + animalSeleccionado + " y no te gusta"+ "\nLa hora y Fecha: " + horaActual + "\n Chiste: " + jokeText
-        + "\n Estado de Animo: " + estadoAnimo + "\nHipotesis: " + personalidad);*/
-  // Obtener referencias a los campos de entrada del formulario
+        + "\n Estado de Animo: " + estadoAnimo + "\nHipotesis: " + personalidad);
+  // Obtener referencias a los campos de entrada del formulario*/
   const ipInput = document.getElementById("ip");
   const fondoInput = document.getElementById("fondo");
   const colorInput = document.getElementById("color");
@@ -113,13 +118,21 @@ function obtenerDatosUsuario() {
   const jokeTextColor = window.getComputedStyle(document.getElementById("joke")).getPropertyValue("color");
   const jokeTextColorHex = rgbToHex(jokeTextColor);
   const animalPreferido = document.getElementById("perro").classList.contains("seleccionado") ? "perro" : "gato";
+  const container = document.getElementById("container");
+  const colorContenedor = getComputedStyle(container).backgroundColor;
+  const colorContenedorHex = rgbToHex(colorContenedor);
   return {
     colorFondo: bodyBackgroundColorHex,
     colorTexto: jokeTextColorHex,
-    animalPreferido: animalPreferido
+    animalPreferido: animalPreferido,
+    colorContenedor: colorContenedorHex,
+    //coloresrgb
+    colorFondoRgb: bodyBackgroundColor,
+    colorTextoRgb: jokeTextColor,
+    colorContenedorRgb: colorContenedor 
   };
 }
-//
+
 /*
     Reglas del estado de animo
 */
@@ -250,3 +263,45 @@ async function guardarDatos(ip, bodyBackgroundColorHex, jokeTextColorHex, animal
   `Chiste: ${jokeText}\n` +
   `Ánimo: ${estadoAnimo}`);
 }
+
+/*
+Ecuacion 
+*/
+function sacarRgb(color){
+  const rgbArray = color.match(/\d+/g);
+  // Asignar los componentes a variables separadas
+  const red = parseInt(rgbArray[0]);
+  const green = parseInt(rgbArray[1]);
+  const blue = parseInt(rgbArray[2]);
+  const sumaRgb = red + green + blue;
+  const total = sumaRgb / 3;
+  return total;
+}
+//
+function tercerColor(datosUsuario){
+  // obtener Datos
+  const colorBody = sacarRgb(datosUsuario.colorFondoRgb);
+  const colorTexto = sacarRgb(datosUsuario.colorTextoRgb);
+  const colorContenedor = sacarRgb(datosUsuario.colorContenedorRgb);
+  // variables formula Cuzzi
+  var resultado = "";
+  var Vi = 0;
+  var Vf = 0;
+  if(colorBody > colorTexto){
+    Vf = parseInt(colorBody);
+    Vi = parseInt(colorTexto);
+  } else{
+    Vf = parseInt(colorTexto);
+    Vi = parseInt(colorBody);
+  }
+  if (colorContenedor >= Vi && colorContenedor >= Vf){
+    resultado = "Apoya al Valor Final";
+  } else if (colorContenedor == Vi && colorContenedor == Vf){
+    resultado = "Su apoyo es Neutro";
+  } else {
+    resultado = "Apoya al Valor Inicial";
+  }
+  // Extraer los componentes RGB
+  return "\nVi ocupa el: " + Vi+" %" + "\nVf ocupa el: " + Vf+" %" + "\nVc ocupa el: " + colorContenedor+" %" + "\nResultado: " + resultado;
+}
+//
