@@ -274,23 +274,22 @@ function obtenerDatosUsuario() {
     var Vi = 0; // Valor Inicial
     var Vf = 0; // Valor FInal
     var Vc = colorContenedor; // Valor Complemento
-    if(colorBody > colorTexto){ //If para identificar cual va ser el Vf y Vi
+    if(colorBody > colorTexto){ //If para   identificar cual va ser el Vf y Vi
       Vf = colorBody; //Vf
       Vi = colorTexto; //Vi
     } else{
       Vf = colorTexto;
       Vi = colorBody;
     } 
-    var Vm = (Vf - Vi) / 2; //Valor del medio
-    var vm = 128;
-    alert("Vi: " + Vi + "\nVf: " + Vf + "\nVc" + Vc + "\nVm: " + Vm);  
+    var Vm = (Vf + Vi) / 2; //Valor del medio
+    //alert("Vi: " + Vi + "\nVf: " + Vf + "\nVc" + Vc + "\nVm: " + Vm);  
     if(Vc > vm && Vc > Vf){ //Valor Contenedor > Valor del Medio (entre Valor Inicial y Final)
       resultado = "Apoya al Valor FInal";
-    } else if(Vc > vm && Vc < Vf){
+    } else if(Vc > Vm && Vc < Vf){
       resultado = "Apoya al Valor FInal";
-    } else if(Vc < vm && Vc < Vi){
+    } else if(Vc < Vm && Vc < Vi){
       resultado = "Apoya al Valor Incial";
-    } else if(Vc < vm && Vc > Vi){
+    } else if(Vc < Vm && Vc > Vi){
       resultado = "Apoya al Valor Incial";
     }
     // Extraer los componentes RGB
