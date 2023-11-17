@@ -47,8 +47,9 @@ app.post('/registrar', (req, res) => {
         personalidad: req.body.personalidad
     });
     nuevoUsuario.save()
-        .then(() => {
+        .then((usuarioGuardado) => {
             console.log('Usuario registrado con éxito.');
+            console.log(usuarioGuardado)
             res.redirect('/');
         })
     .catch(err => console.error('Error al registrar el usuario: ', err));
