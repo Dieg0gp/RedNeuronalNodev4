@@ -268,7 +268,7 @@ function obtenerDatosUsuario() {
     const colorBody = sacarRgb(datosUsuario.colorFondoRgb);
     const colorTexto = sacarRgb(datosUsuario.colorTextoRgb);
     const colorContenedor = sacarRgb(datosUsuario.colorContenedorRgb);
-    //alert("Vi: " + colorBody + "\nVf: " + colorTexto + "\nVc" + colorContenedor);  
+    //`alert("Vi: " + colorBody + "\nVf: " + colorTexto + "\nVc" + colorContenedor);  
     // variables formula Cuzzi
     var resultado = "";
     var Vi = 0; // Valor Inicial
@@ -282,14 +282,15 @@ function obtenerDatosUsuario() {
       Vi = colorBody;
     } 
     var Vm = (Vf + Vi) / 2; //Valor del medio
+    var vm = 128;
     //alert("Vi: " + Vi + "\nVf: " + Vf + "\nVc" + Vc + "\nVm: " + Vm);  
     if(Vc > vm && Vc > Vf){ //Valor Contenedor > Valor del Medio (entre Valor Inicial y Final)
       resultado = "Apoya al Valor FInal";
-    } else if(Vc > Vm && Vc < Vf){
+    } else if(Vc > vm && Vc < Vf){
       resultado = "Apoya al Valor FInal";
-    } else if(Vc < Vm && Vc < Vi){
+    } else if(Vc < vm && Vc < Vi){
       resultado = "Apoya al Valor Incial";
-    } else if(Vc < Vm && Vc > Vi){
+    } else if(Vc < vm && Vc > Vi){
       resultado = "Apoya al Valor Incial";
     }
     // Extraer los componentes RGB
