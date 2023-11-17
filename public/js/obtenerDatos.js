@@ -280,9 +280,8 @@ function obtenerDatosUsuario() {
     } else{
       Vf = colorTexto;
       Vi = colorBody;
-    } 
-    var Vm = (Vf + Vi) / 2; //Valor del medio
-    var vm = 128;
+    }     
+    var vm = (Vf + Vi) / 2;
     //alert("Vi: " + Vi + "\nVf: " + Vf + "\nVc" + Vc + "\nVm: " + Vm);  
     if(Vc > vm && Vc > Vf){ //Valor Contenedor > Valor del Medio (entre Valor Inicial y Final)
       resultado = "Apoya al Valor FInal";
