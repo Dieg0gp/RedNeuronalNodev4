@@ -176,15 +176,15 @@ function obtenerDatosUsuario() {
     colorBody = datosUsuario.colorFondo; //color fondo
     colorTexto = datosUsuario.colorTexto; //color tex
     if (colorBody == "#ff0000" && colorTexto == "#ff0000") { // Rojo + Rojo
-      return ROJO_ROJO;
+      return rojo;
     } else if (colorBody == "#0000ff" && colorTexto == "#0000ff") { // azul + azul
-      return AZUL_AZUL;
+      return azul;
     } else if (colorBody == "#008000" && colorTexto == "#008000"){ // verde + verde
-      return VERDE_VERDE; 
+      return verde; 
     } else if (colorBody == "#ffff00" && colorTexto == "#ffff00"){ // amarillo + amarillo
-      return AMARILLO_AMARILLO;
+      return amarillo;
     } else if (colorBody == "#ffa500" && colorTexto == "#ffa500"){ // naranja + naranja
-      return NARANJA_NARANJA;
+      return naranja;
     } else if (colorBody == "#800080" && colorTexto == "#800080"){ // violeta + violeta
       return violeta;
     } else if (colorBody == "#4b0082" && colorTexto == "#4b0082"){ // indigo + indigo
@@ -240,7 +240,8 @@ function obtenerDatosUsuario() {
 
   // Hipotesis Planteadas.
   function obtenerHipotesis(animalSeleccionado){
-    const hipotesis1 = "Sociables, Abiertos"; //Caso que las personas les gusta los perros
+    //const hipotesis1 = "Sociables, Abiertos"; //Caso que las personas les gusta los perros
+    const hipotesis1 = "Extrovertidos"; //Caso que las personas les gusta los perros
     const hipotesis2 = "Introvertidos"; //Caso que las personas les gustan los gatos     
     if(animalSeleccionado == "perro"){
       return hipotesis1;
@@ -269,7 +270,7 @@ function obtenerDatosUsuario() {
     const colorTexto = sacarRgb(datosUsuario.colorTextoRgb);
     const colorContenedor = sacarRgb(datosUsuario.colorContenedorRgb);
     //`alert("Vi: " + colorBody + "\nVf: " + colorTexto + "\nVc" + colorContenedor);  
-    // variables formula Cuzzi
+    // variables formula 
     var resultado = "";
     var Vi = 0; // Valor Inicial
     var Vf = 0; // Valor FInal
@@ -277,22 +278,58 @@ function obtenerDatosUsuario() {
     if(colorBody > colorTexto){ //If para   identificar cual va ser el Vf y Vi
       Vf = colorBody; //Vf
       Vi = colorTexto; //Vi
+      var vfAnimo = datosUsuario.colorFondo;    
+      var viAnimo = datosUsuario.colorTexto;
+      var vbody = "Vf = " + colorBody + " : " + vfAnimo +"\nVi = " + colorTexto + " : " + viAnimo;  
     } else{
       Vf = colorTexto;
       Vi = colorBody;
-    }     
-    var vm = (Vf + Vi) / 2;
+      var vfAnimo = datosUsuario.colorTexto;    
+      var viAnimo = datosUsuario.colorFondo;
+      var vbody = "Vf = " + colorTexto + " : " + vfAnimo + "\nVi = " + colorBody + " : " + viAnimo;      
+    }    
+    //Sacamos el medio
+    var vm = (Vf + Vi) / 2; //Valor del medio de los dos.    
+    //vm = vm.toFixed(3);
     //alert("Vi: " + Vi + "\nVf: " + Vf + "\nVc" + Vc + "\nVm: " + Vm);  
-    if(Vc > vm && Vc > Vf){ //Valor Contenedor > Valor del Medio (entre Valor Inicial y Final)
-      resultado = "Apoya al Valor FInal";
-    } else if(Vc > vm && Vc < Vf){
-      resultado = "Apoya al Valor FInal";
-    } else if(Vc < vm && Vc < Vi){
-      resultado = "Apoya al Valor Incial";
-    } else if(Vc < vm && Vc > Vi){
-      resultado = "Apoya al Valor Incial";
+    //alert(vbody)
+    if(Vc > vm){ //Valor Contenedor > Valor del Medio (entre Valor Inicial y Final)
+      resultado = "Apoya al Vf es: " + vfAnimo; //Apoya al Valor Final
+      //alert(vbody + "\n" + "Vc : " + Vc  + " " + datosUsuario.colorContenedor + "\nVm: " + vm + "\n" + resultado + " : " + busquedaTerceColor(vfAnimo));
+    } else if(Vc < vm){
+      resultado = "Apoya al Vi es: " + viAnimo; //Apoya al Valor Incial
+      //alert(vbody + "\n" + "Vc : " + Vc  + " " + datosUsuario.colorContenedor + "\nVm: " + vm + "\n" + resultado + " : " + busquedaTerceColor(viAnimo));
+    } else if(Vc < vm && Vc > vm && Vc < Vf && Vc < Vi){
+      resultado = "es Neutral";
+      //alert(vbody + "\n" + "Vc : " + Vc  + " " + datosUsuario.colorContenedor + "\nVm: " + vm + "\n" + resultado);
     }
     // Extraer los componentes RGB
     return "\nVi ocupa el: " + Vi+" %" + "\nVf ocupa el: " + Vf+" %" + "\nVc ocupa el: " + colorContenedor+" %" + "\nResultado: " + resultado;
   }
   //
+  function busquedaTerceColor(dato) {
+    const rojo = "Amor";
+    const azul = "Confianza";
+    const verde = "Esperanza";
+    const amarillo = "Envidia";
+    const naranja = "Alegria";
+    const violeta = "Relajados";
+    const indigo = "Frialdad";
+    if (dato == "#0000ff") {
+        return azul;
+    } else if (dato == "#ff0000") {
+        return rojo;
+    } else if (dato == "#008000") {
+        return verde;
+    } else if (dato == "#ffff00") {
+        return amarillo;
+    } else if (dato == "#ffa500") {
+        return naranja;
+    } else if (dato == "#800080") {
+        return violeta;
+    } else if (dato == "#4b0082") {
+        return indigo;
+    }
+}
+
+
